@@ -16,4 +16,4 @@ app.use("/",(req,res,next)=>{
 app.use("/mentor",mentorRouter);
 app.use("/student",studentRouter);
 
-app.listen("3003");
+app.listen(process.env.PORT || 5000);
