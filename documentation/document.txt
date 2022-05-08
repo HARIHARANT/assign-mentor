@@ -1,0 +1,187 @@
+Get Students List: GET
+URL:
+http://localhost:3003/student/get
+
+Request: 
+{}
+
+Response:
+[
+  {
+    "_id": "627752acb1a0a92915064766",
+    "student_id": "1",
+    "student_name": "John",
+    "email": "john@gmail.com",
+    "mobile": "9842272856",
+    "mentor_id": "1",
+    "created_at": {
+      "$timestamp": "7095231233633812483"
+    }
+  }
+]
+
+Create Students: POST
+URL:
+http://localhost:3003/student/set
+
+Request: 
+{   
+    "student_id": "1",
+    "student_name": "John",
+    "email": "john@gmail.com",
+    "mobile": "9842272856",
+    "mentor_id": "1"
+}
+
+Response:
+{
+    "acknowledged": true,
+    "insertedId": "627770b2da79fc1835b654f3"
+}
+
+Select One Student and Assign one Mentor
+Update Student Data: PUT
+URL:
+http://localhost:3003/student/put/6
+
+Request:
+{                
+    "mentor_id": 1     
+}
+
+Response:
+{
+    "acknowledged": true,
+    "modifiedCount": 1,
+    "upsertedId": null,
+    "upsertedCount": 0,
+    "matchedCount": 1
+}
+
+
+Get Mentors List: GET
+URL:
+http://localhost:3003/mentor/get
+
+Request:
+{}
+
+Response:
+[
+  {
+    "_id": "62775b7c7c7aa2321b3f607b",
+    "mentor_id": "1",
+    "mentor_name": "Sivaranjani",
+    "students": [
+      "{student_id:1}",
+      "{student_id:2}",
+      "{student_id:3}"
+    ],
+    "email": "sivaranjani@gmail.com",
+    "mobile": "9842234876",
+    "created_at": {
+      "$timestamp": "7095240171460755458"
+    }
+  }
+]
+
+Create Mentors: POST
+URL:
+http://localhost:3003/mentor/set
+
+Request:
+{   
+    "mentor_id": "1",
+    "mentor_name": "Sivaranjani",
+    "students": [
+      "{student_id:1}",
+      "{student_id:2}",
+      "{student_id:3}"
+    ],
+    "email": "sivaranjani@gmail.com",
+    "mobile": "9842234876"
+  }
+
+Response:
+{
+    "acknowledged": true,
+    "insertedId": "627770b2da79fc1835b654f3"
+}
+
+Write API to Assign a student to Mentor : PUT
+Select one mentor and Add multiple Student 
+URL:
+http://localhost:3003/mentor/put/1
+
+Request:
+{   "mentor_name": "Sivaranjani",    
+    "students": [
+      "{student_id:1}",
+      "{student_id:2}",
+      "{student_id:3}",
+      "{student_id:4}",
+      "{student_id:5}",
+      "{student_id:6}"
+    ]
+}
+
+Response:
+{
+    "acknowledged": true,
+    "modifiedCount": 1,
+    "upsertedId": null,
+    "upsertedCount": 0,
+    "matchedCount": 1
+}
+
+A student who has a mentor should not be shown in List : GET
+URL:
+http://localhost:3003/student/getStudentWithoutMentor
+
+Request:
+{}
+
+Response:
+[
+    {
+        "_id": "627772edda79fc1835b654f4",
+        "student_id": "6",
+        "student_name": "Peter",
+        "email": "peter@gmail.com",
+        "mobile": "8975842500",
+        "mentor_id": 0,
+        "created_at": 1651995373959
+    }
+]
+
+
+Write API to show all students for a particular mentor : GET
+URL:
+http://localhost:3003/student/getstudentfilterbymentor/1
+
+Request:
+{}
+
+Response:
+[
+    {
+        "_id": "627752acb1a0a92915064766",
+        "student_id": "1",
+        "student_name": "John",
+        "email": "john@gmail.com",
+        "mobile": "9842272856",
+        "mentor_id": "1",
+        "created_at": {
+            "$timestamp": "7095231233633812483"
+        }
+    },
+    {
+        "_id": "627772edda79fc1835b654f4",
+        "student_id": "6",
+        "student_name": "Peter",
+        "email": "peter@gmail.com",
+        "mobile": "8975842500",
+        "mentor_id": "1",
+        "created_at": 1651995373959
+    }
+]
